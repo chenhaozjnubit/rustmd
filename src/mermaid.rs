@@ -3732,7 +3732,7 @@ impl Scene {
         s.push_str(&format!(
             "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"{:.0}\" height=\"{:.0}\" \
              viewBox=\"0 0 {:.0} {:.0}\"><rect width=\"100%\" height=\"100%\" fill=\"white\"/>\
-             <g font-family=\"PingFang SC,Helvetica,sans-serif\">",
+             <g font-family=\"PingFang SC,Microsoft YaHei,Helvetica,sans-serif\">",
             self.size.x + 20.0,
             self.size.y + 20.0,
             self.size.x + 20.0,

@@ -38,6 +38,13 @@ jobs:
       - name: Test
         run: cargo test --release --locked
 
+      # Which files the font lookups settled on, in the log. A face index is
+      # resolved by reading the font's `name` table, and only a real Windows
+      # machine can say whether the answer is right; without this the log stays
+      # silent on the one thing one cannot check from macOS.
+      - name: Report the fonts resolved on Windows
+        run: cargo test --release --locked fonts::tests -- --nocapture
+
       - name: Build
         run: cargo build --release --locked
 
