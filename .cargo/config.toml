@@ -1,0 +1,12 @@
+# The default `x86_64-pc-windows-msvc` target links the C runtime dynamically.
+# That makes the .exe import VCRUNTIME140.dll and the Universal CRT, so a
+# machine without the Visual C++ Redistributable fails at launch with
+# "VCRUNTIME140.dll was not found" — a bad first experience for something that
+# is supposed to be a single downloadable file.
+#
+# Linking the CRT statically removes those imports (only the DLLs every Windows
+# install ships are left) at the cost of a slightly larger .exe.
+#
+# Scoped to the Windows target so the macOS build is unaffected.
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
