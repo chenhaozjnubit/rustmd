@@ -1,0 +1,72 @@
+[package]
+name = "rustmd"
+version = "0.1.0"
+edition = "2021"
+description = "A Typora-style WYSIWYG Markdown editor & reader, written in pure Rust"
+license = "MIT"
+
+[dependencies]
+# GUI
+eframe = { version = "0.31.1", default-features = false, features = ["glow", "default_fonts"] }
+egui = "0.31.1"
+egui_extras = { version = "0.31.1", features = ["image"] }
+
+# Media
+image = { version = "0.25", default-features = false, features = [
+    "png",
+    "jpeg",
+    "gif",
+    "webp",
+    "bmp",
+] }
+
+# Native file dialogs
+rfd = "0.15"
+
+# Syntax highlighting for fenced code blocks (pure-rust regex engine, no C deps)
+syntect = { version = "5.2", default-features = false, features = [
+    "default-fancy",
+    "dump-load",
+] }
+
+# Text helpers
+unicode-segmentation = "1.12"
+
+# Config persistence. NOTE: these must stay in `[dependencies]` — anything that
+# follows a `[target.'cfg(...)'.dependencies]` header belongs to that table
+# until the next header, and comments do not end a table. Putting them after the
+# unix section silently makes the config module unix-only.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Reading the process's own memory usage in `--bench` without shelling out to
+# `ps`, which is not always permitted.
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+# Receiving documents that Finder hands over. A bundled app is launched
+# *without* the file in `argv`, so the path only arrives through an Apple
+# Event; refusing to be the handler for `.md` files would be worse than
+# accepting them. Same versions `rfd` already pulls in, so nothing new is
+# compiled.
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.6"
+objc2-foundation = { version = "0.3", default-features = false, features = [
+    "std",
+    "NSArray",
+    "NSObject",
+    "NSString",
+    "NSURL",
+    "NSAppleEventDescriptor",
+] }
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+strip = true

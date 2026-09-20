@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>demo</title>
+<style>
+:root {
+  --bg: #FFFFFF; --fg: #262B33; --muted: #6E7681; --border: #E4E8ED;
+  --code-bg: #F6F8FA; --accent: #2F6FEB; --quote-bar: #D3D9E0; --head-bg: #F4F6F8;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  font-size: 16.5px; line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 780px; margin: 0 auto; padding: 56px 28px 120px; }
+h1, h2, h3, h4, h5, h6 { line-height: 1.3; margin: 1.6em 0 .6em; font-weight: 600; }
+h1 { font-size: 1.85em; margin-top: 1.1em; }
+h2 { font-size: 1.48em; padding-bottom: .24em; border-bottom: 1px solid var(--border); }
+h3 { font-size: 1.24em; }
+h4 { font-size: 1.08em; }
+h5, h6 { font-size: 1em; color: var(--muted); }
+p { margin: .85em 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 600; }
+del { color: var(--muted); }
+mark { background: #FFF3B0; color: #4A3B00; padding: 0 .18em; border-radius: 3px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+blockquote {
+  margin: 1em 0; padding: .1em 0 .1em 1em;
+  border-left: 3px solid var(--quote-bar); color: var(--muted);
+}
+blockquote p { margin: .5em 0; }
+code {
+  font-family: "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  background: var(--code-bg); padding: .13em .38em; border-radius: 4px;
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 16px; overflow-x: auto; margin: 1.1em 0; line-height: 1.55;
+}
+pre code { background: none; padding: 0; font-size: .86em; }
+ul, ol { margin: .7em 0; padding-left: 1.6em; }
+li { margin: .25em 0; }
+li > ul, li > ol { margin: .25em 0; }
+input[type=checkbox] { margin-right: .35em; }
+table { border-collapse: collapse; margin: 1.2em 0; width: 100%; font-size: .95em; }
+th, td { border: 1px solid var(--border); padding: .5em .7em; text-align: left; }
+th { background: var(--head-bg); font-weight: 600; }
+img { max-width: 100%; border-radius: 6px; }
+.math-display { text-align: center; margin: 1.2em 0; overflow-x: auto; }
+.footnotes { font-size: .92em; color: var(--muted); }
+.footnotes-sep { margin-top: 3em; }
+@media print {
+  body { background: #fff; }
+  .page { max-width: none; padding: 0; }
+  pre, table, blockquote { break-inside: avoid; }
+}
+
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],processEscapes:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<main class="page">
+<h1>rustmd 功能演示</h1>
+<p>这是一段普通正文，用来检验<strong>行内加粗</strong>、<em>斜体</em>、<strong><em>粗斜体</em></strong>、<del>删除线</del>、<code>行内代码</code> 与 <mark>高亮</mark> 的渲染效果。 中文排版应当有合适的行高与字距，英文 mixing text 也要自然。</p>
+<h2>二级标题</h2>
+<h3>三级标题</h3>
+<h4>四级标题</h4>
+<blockquote>
+<p>引用块：文字应当有左侧竖线，颜色略淡。 支持多行，也支持引用里的 <strong>行内标记</strong>。</p>
+</blockquote>
+<hr>
+<h2>列表</h2>
+<ul>
+<li>无序项一</li>
+<li>无序项二<ul>
+<li>嵌套项 A</li>
+<li>嵌套项 B</li>
+</ul>
+</li>
+<li>无序项三</li>
+</ul>
+<ol>
+<li>有序项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ol>
+<ul>
+<li><input type="checkbox" disabled checked> 已完成的任务</li>
+<li><input type="checkbox" disabled> 未完成的任务</li>
+</ul>
+<h2>代码</h2>
+<pre><code class="language-rust">use std::collections::HashMap;
+
+/// 计算斐波那契数列
+fn fib(n: u64) -&gt; u64 {
+    let mut memo: HashMap&lt;u64, u64&gt; = HashMap::new();
+    (0..=n).fold((0, 1), |(a, b), i| {
+        memo.insert(i, a);
+        (b, a + b)
+    }).1
+}</code></pre>
+<pre><code class="language-python">def greet(name: str) -&gt; str:
+    return f"hello, {name}"</code></pre>
+<h2>表格</h2>
+<table><thead><tr><th>功能</th><th style="text-align:center">状态</th><th style="text-align:right">说明</th></tr></thead><tbody><tr><td>实时渲染</td><td style="text-align:center">完成</td><td style="text-align:right">光标所在块显示源码</td></tr><tr><td>数学公式</td><td style="text-align:center">完成</td><td style="text-align:right">自研排版引擎</td></tr><tr><td>导出 HTML</td><td style="text-align:center">完成</td><td style="text-align:right">单文件、带样式</td></tr></tbody></table>
+<h2>数学</h2>
+<p>行内公式 <span class="math-inline">\(E = mc^2\)</span>，以及 <span class="math-inline">\(\alpha + \beta = \gamma\)</span>。</p>
+<div class="math-display">\[\sum_{i=1}^{n} x_i = \frac{n(n+1)}{2}\]</div>
+<div class="math-display">\[\int_{0}^{\infty} e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}\]</div>
+<div class="math-display">\[\left( \frac{a}{b} \right)^{2} \qquad \sqrt[3]{x + y} \qquad \lim_{x \to 0} \frac{\sin x}{x} = 1\]</div>
+<h2>链接与图片</h2>
+<p><a href="https://www.anthropic.com" target="_blank" rel="noreferrer">Anthropic</a> 与 <a href="https://www.rust-lang.org" target="_blank" rel="noreferrer">https://www.rust-lang.org</a>。</p>
+<h2>脚注与杂项</h2>
+<p>这是一段带脚注的文字<sup class="fn-ref"><a href="#fn-1">[1]</a></sup>。</p>
+<p>行尾两个空格换行  <br>
+第二行。</p>
+
+</main>
+</body>
+</html>

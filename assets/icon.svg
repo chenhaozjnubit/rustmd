@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    rustmd 图标。
+
+    画布 1024，内容方圆 824（四周各留 100），圆角 186 —— macOS Big Sur 之后
+    的图标栅格，Dock 与 Finder 都按这个内缩量对齐，不照做会显得比别人的图标大。
+
+    记号本身是 Markdown 的经典 "M↓"：白纸一张，M 用靛蓝，箭头用锈橙 —— 后者
+    是 Rust 的颜色，算是给这个用 Rust 写的编辑器留个签名。
+    所有尺寸都是从同一个 viewBox 出的矢量，16px 到 1024px 不会糊。
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7B6CF6"/>
+      <stop offset="1" stop-color="#4331BE"/>
+    </linearGradient>
+    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEECFF"/>
+    </linearGradient>
+    <radialGradient id="gloss" cx="0.3" cy="0.14" r="0.78">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="shape">
+      <rect x="100" y="100" width="824" height="824" rx="186"/>
+    </clipPath>
+    <filter id="pageShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#241A6E" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+
+  <rect x="100" y="100" width="824" height="824" rx="186" fill="url(#bg)"/>
+  <g clip-path="url(#shape)">
+    <rect x="100" y="100" width="824" height="824" fill="url(#gloss)"/>
+  </g>
+
+  <rect x="262" y="292" width="500" height="440" rx="56" fill="url(#page)" filter="url(#pageShadow)"/>
+
+  <g fill="none" stroke-width="48" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M341 636 L341 388 L421 548 L501 388 L501 636" stroke="#372A9E"/>
+    <path d="M629 388 L629 636" stroke="#FF8A4C"/>
+    <path d="M575 542 L629 636 L683 542" stroke="#FF8A4C"/>
+  </g>
+</svg>

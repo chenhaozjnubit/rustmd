@@ -1,0 +1,20 @@
+# Build output
+/target
+/dist
+
+# Local project metadata (agent workspace, notes, machine-specific state)
+.workbuddy/
+.agent-teams/
+
+# macOS
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editors
+*.swp
+*.swo
+*~
